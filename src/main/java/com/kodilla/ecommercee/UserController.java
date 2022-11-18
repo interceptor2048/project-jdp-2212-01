@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee;
 
+import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +25,13 @@ public class UserController {
     }
 
     @PutMapping(value = "BlockUser")
-    public ResponseEntity<String> blockUser(@RequestParam Long userId) {
-        return ResponseEntity.ok(userId + "Is blocked");
+    public ResponseEntity<String> blockUser(@RequestParam Long userId, @RequestParam Boolean isBlocked) {
+        isBlocked = true;
+        return ResponseEntity.ok("This user is now blocked");
     }
 
     @PostMapping(value = "CreateUser")
-    public ResponseEntity<UserDto> createUser(@RequestParam Long userId,  @RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam Boolean isBlocked, @RequestParam Long userKey) {
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         return ResponseEntity.ok((new UserDto(1L, "JohnyWick78", "Martin", "Smith", false, 141L )));
     }
 
