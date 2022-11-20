@@ -1,14 +1,11 @@
-package com.kodilla.ecommercee.domain.dto;
+package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
-
-public class UserDto {
+public class User {
 
     private Long userId;
 
@@ -21,5 +18,6 @@ public class UserDto {
     private Boolean isBlocked;
 
     private Long userKey;
+
 
 }
