@@ -1,38 +1,38 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.dto.CartItemDto;
+import com.kodilla.ecommercee.domain.dto.CartDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+
 
 @RestController
 @RequestMapping("/v1/carts")
 public class CartController {
 
-    CartItemDto cartItemDto = new CartItemDto(0L, 0L, 0L, null, 0);
 
     @PostMapping(value = "/emptyCart")
-    public ResponseEntity<CartItemDto> createEmptyCart(){
-        return ResponseEntity.ok(cartItemDto);
+    public ResponseEntity<CartDto> createEmptyCart(){
+        return ResponseEntity.ok(new CartDto(0,0,new ArrayList<>()));
     }
 
-    @GetMapping(value = "/getEmptyCart")
-    public ResponseEntity<CartItemDto> getEmptyCart(){
-        return ResponseEntity.ok(cartItemDto);
+    @GetMapping(value = "/getEmptyCart/{cardId}")
+    public ResponseEntity<CartDto> getEmptyCart(@PathVariable Long cardId){
+        return ResponseEntity.ok(new CartDto(cardId, 0, new ArrayList<>()));
     }
 
     @PostMapping(value = "/addProducts/{cardId}/{productId}")
-    public ResponseEntity<CartItemDto> addProduct(@PathVariable Long cardId, @PathVariable Long productId) {
-        return ResponseEntity.ok(new CartItemDto(cardId, productId, 0L, null, 0l));
+    public ResponseEntity<CartDto> addProduct(@PathVariable Long cardId, @PathVariable Long productId) {
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(value = "{cardId}/{productId}")
     public ResponseEntity<Void> deleteProductFromCard(@PathVariable Long cardId, @PathVariable Long productId) {
         return ResponseEntity.ok().build();
     }
-
     @PostMapping(value = "createOrder")
     public ResponseEntity<Void> createOrderFromCart() {
         return ResponseEntity.ok().build();
     }
-
 }

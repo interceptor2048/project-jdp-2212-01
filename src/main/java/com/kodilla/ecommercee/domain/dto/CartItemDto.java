@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CartItemDto {
     private long id;
-    private long productId;
+    private long product_id;
+    private long order_id;
     private long quantity;
     private BigDecimal unitPrice;
-    private long orderId;
 }
