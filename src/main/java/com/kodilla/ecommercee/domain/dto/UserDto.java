@@ -1,2 +1,4 @@
-package com.kodilla.ecommercee.domain.dto;public class UserDto {
+package com.kodilla.ecommercee.domain.dto;
+
+public class UserDto {
 }
