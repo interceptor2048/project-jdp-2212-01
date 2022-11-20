@@ -16,6 +16,11 @@ import java.util.List;
 @Table(name = "CART")
 public class Cart {
 
+    public Cart(User user, List<CartItem> cartItems) {
+        this.user = user;
+        this.cartItems = cartItems;
+    }
+
     @Id
     @GeneratedValue
     @NotNull
