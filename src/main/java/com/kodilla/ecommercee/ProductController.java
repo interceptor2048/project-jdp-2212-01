@@ -21,6 +21,7 @@ public class ProductController {
     public ProductDto getProduct(@PathVariable Long productId) {
         return new ProductDto(1,"kurtka zimowa","Pellentesque tempus...",100,"1");
     }
+
     @DeleteMapping(value = "{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
         return ResponseEntity.ok().build();
@@ -28,12 +29,11 @@ public class ProductController {
 
     @PutMapping(value = "{productId}")
     public ProductDto updateProduct(@PathVariable Long productId) {
-        return new ProductDto(1,"kurtka zimowabbbbbbb","Pellentesque tempus...",100,"1");
+        return new ProductDto(1,"kurtka MODIFY","Pellentesque tempus...",100,"1");
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> createProduct() {
         return ResponseEntity.ok().build();
     }
-
 }
