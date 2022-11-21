@@ -1,12 +1,23 @@
-package com.kodilla.ecommercee.product.domain;
+package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Product {
-    private int id;
-    private  String name;
-    private String description;
-    private int price;
-    private String groupId;
+
+    @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name = "PRODUCT_ID")
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "group_group_id")
+    private Group group;
 }
