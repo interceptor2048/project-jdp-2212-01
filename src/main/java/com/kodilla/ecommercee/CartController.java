@@ -1,14 +1,11 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.CartStatus;
+
 import com.kodilla.ecommercee.domain.dto.CartDto;
-import com.kodilla.ecommercee.domain.dto.OrderDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
 
 
 @RestController
