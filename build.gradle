@@ -21,8 +21,14 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     runtimeOnly('com.h2database:h2')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+<<<<<<< HEAD
     runtimeOnly 'mysql:mysql-connector-java'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+=======
+    runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    runtimeOnly 'mysql:mysql-connector-java'
+>>>>>>> fdd7c8f9c5378b5090cf0cf0726617d85148818d
 }
 
 tasks.named('test') {
