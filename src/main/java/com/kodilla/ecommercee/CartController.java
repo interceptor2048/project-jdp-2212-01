@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.service.CartDbService;
@@ -24,16 +24,17 @@ public class CartController {
     @Autowired
     private CartMapper cartMapper;
 
+
     @PostMapping(value = "/emptyCart", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CartDto> createEmptyCart(@RequestBody CartDto cartDto){
-        Cart cart = cartMapper.mapToCart(cartDto);
+        Order cart = cartMapper.mapToCart(cartDto);
         cartDbService.saveCart(cart);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/getEmptyCart/{cardId}")
     public ResponseEntity<CartDto> getEmptyCart(@PathVariable Long cardId){
-        return ResponseEntity.ok(new CartDto(cardId, 0, new ArrayList<>()));
+        return ResponseEntity.ok(new CartDto(cardId, new ArrayList<>()));
     }
 
     @PostMapping(value = "/addProducts/{cardId}/{productId}")

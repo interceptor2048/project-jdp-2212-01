@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,18 +20,18 @@ public class CartTestSuit {
     private CartRepository cartRepository;
 
     @Test
-    void testCreateCart() {
+    void testCreateOrder() {
         //Given
         User user = new User();
-        Cart cart = new Cart(user);
+        Order cart = new Order();
 
         //When
         cartRepository.save(cart);
         long id = cart.getId();
-        Optional<Cart> readCart = cartRepository.findById(id);
+        Optional<Order> readOrder = cartRepository.findById(id);
 
         //Then
-        assertTrue(readCart.isPresent());
+        assertTrue(readOrder.isPresent());
 
     }
 
@@ -42,7 +40,7 @@ public class CartTestSuit {
         //Given
         User user = new User();
         Group group = new Group();
-        Cart cart = new Cart(user);
+        Order cart = new Order();
         Product product = new Product(group, "name", "description", new BigDecimal(5));
         Product product1 = new Product(group, "name1", "description1", new BigDecimal(6));
         Product product2 = new Product(group, "name2", "description2", new BigDecimal(3));
@@ -65,11 +63,11 @@ public class CartTestSuit {
     }
 
     @Test
-    void testCartDelete() {
+    void testOrderDelete() {
         //Given
         User user = new User();
-        Cart cart = new Cart(user);
-        Cart cart1 = new Cart(user);
+        Order cart = new Order();
+        Order cart1 = new Order();
 
         //When
         cartRepository.save(cart);
@@ -77,19 +75,19 @@ public class CartTestSuit {
         long id = cart.getId();
         long id1 = cart1.getId();
         cartRepository.deleteById(id1);
-        Optional<Cart> readCart = cartRepository.findById(id);
-        Optional<Cart> readCart1 = cartRepository.findById(id1);
+        Optional<Order> readOrder = cartRepository.findById(id);
+        Optional<Order> readOrder1 = cartRepository.findById(id1);
 
         //Then
-        assertTrue(readCart.isPresent());
-        assertFalse(readCart1.isPresent());
+        assertTrue(readOrder.isPresent());
+        assertFalse(readOrder1.isPresent());
     }
 
     @Test
     void testUpdateProducts() {
         //Given
         User user = new User();
-        Cart cart = new Cart(user);
+        Order cart = new Order();
         Group group = new Group();
         Product product = new Product(group, "name", "description", new BigDecimal(5));
         Product product1 = new Product(group, "name1", "description1", new BigDecimal(6));

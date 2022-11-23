@@ -1,41 +1,44 @@
 package com.kodilla.ecommercee.domain;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "CART")
-public class Cart {
+@AllArgsConstructor
+@Data
+@Entity(name = "ORDERS")
+public class Order {
 
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name = "CART_ID")
-    private long id;
+    @Column (name = "ID")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    @Column(name = "DATE_TIME")
+    private LocalDateTime dateTime = LocalDateTime.now();
+
+    @Column(name = "STATUS")
+    private CartStatus cartStatus = CartStatus.CART;
+
     @OneToMany(targetEntity = CartItem.class,
-            mappedBy = "cart",
+            mappedBy = "order",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<CartItem> products = new ArrayList<>();
-
-    public Cart(User user) {
-        this.user = user;
-    }
 
     public void addProduct(Product product) {
         CartItem cartItem = new CartItem(this, product);
@@ -48,10 +51,10 @@ public class Cart {
              iterator.hasNext();) {
             CartItem cartItem = iterator.next();
 
-            if(cartItem.getCart().equals(this) && cartItem.getProduct().equals(product)) {
+            if(cartItem.getOrder().equals(this) && cartItem.getProduct().equals(product)) {
                 iterator.remove();
                 cartItem.getProduct().getCarts().remove(cartItem);
-                cartItem.setCart(null);
+                cartItem.setOrder(null);
                 cartItem.setProduct(null);
             }
         }

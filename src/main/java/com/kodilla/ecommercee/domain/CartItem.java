@@ -24,8 +24,8 @@ public class CartItem {
 
     @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "CART_ID")
-    private Cart cart;
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 
     @ToString.Exclude
     @ManyToOne
@@ -38,8 +38,8 @@ public class CartItem {
     @Column(name = "UNITPRICE")
     private BigDecimal unitPrice;
 
-    public CartItem(Cart cart, Product product) {
-        this.cart = cart;
+    public CartItem(Order order, Product product) {
+        this.order = order;
         this.product = product;
         this.unitPrice = product.getPrice();
     }
