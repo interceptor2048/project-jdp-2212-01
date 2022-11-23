@@ -27,7 +27,7 @@ public class CartController {
     }
 
     @PostMapping(value = "/addProducts/{cardId}/{productId}")
-    public ResponseEntity<OrderDto> addProduct(@PathVariable Long cardId, @PathVariable Long productId) {
+    public ResponseEntity<CartDto> addProduct(@PathVariable Long cardId, @PathVariable Long productId) {
         return ResponseEntity.ok().build();
     }
 
