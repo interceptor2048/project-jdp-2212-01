@@ -18,6 +18,5 @@ public class User {
     private Boolean isBlocked;
 
     private Long userKey;
-
 }
 
