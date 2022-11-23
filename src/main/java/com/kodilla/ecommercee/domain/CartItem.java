@@ -22,8 +22,8 @@ public class CartItem {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "CART_ID")
-    private Cart cart;
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
