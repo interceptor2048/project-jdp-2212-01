@@ -14,12 +14,12 @@ public class CartController {
 
     @PostMapping(value = "/emptyCart")
     public ResponseEntity<CartDto> createEmptyCart(){
-        return ResponseEntity.ok(new CartDto(0,0,new ArrayList<>()));
+        return ResponseEntity.ok(new CartDto(1, new ArrayList<>()));
     }
 
     @GetMapping(value = "/getEmptyCart/{cardId}")
     public ResponseEntity<CartDto> getEmptyCart(@PathVariable Long cardId){
-        return ResponseEntity.ok(new CartDto(cardId, 0, new ArrayList<>()));
+        return ResponseEntity.ok(new CartDto(cardId, new ArrayList<>()));
     }
 
     @PostMapping(value = "/addProducts/{cardId}/{productId}")
@@ -31,10 +31,8 @@ public class CartController {
     public ResponseEntity<Void> deleteProductFromCard(@PathVariable Long cardId, @PathVariable Long productId) {
         return ResponseEntity.ok().build();
     }
-
     @PostMapping(value = "createOrder")
     public ResponseEntity<Void> createOrderFromCart() {
         return ResponseEntity.ok().build();
     }
-
 }

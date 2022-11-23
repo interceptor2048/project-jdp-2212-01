@@ -11,5 +11,9 @@ public class CartItemDto {
     private long product_id;
     private long order_id;
     private long quantity;
+<<<<<<< HEAD
     private long unit_Price;
+=======
+    private BigDecimal unitPrice;
+>>>>>>> JDP221201-14
 }
