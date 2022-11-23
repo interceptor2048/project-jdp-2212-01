@@ -38,8 +38,8 @@ public class CartItem {
     @Column(name = "UNITPRICE")
     private BigDecimal unitPrice;
 
-    public CartItem(Cart cart, Product product) {
-        this.cart = cart;
+    public CartItem(Order order, Product product) {
+        this.order = order;
         this.product = product;
     }
 }
