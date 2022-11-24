@@ -2,17 +2,15 @@ package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
 @Entity(name = "ORDERS")
 public class Order {
 
