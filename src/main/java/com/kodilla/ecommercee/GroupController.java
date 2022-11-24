@@ -22,7 +22,7 @@ public class GroupController {
 
     @GetMapping(value = "{groupId}")
     public GroupDto getGroup(@PathVariable Long groupId) {
-        return new GroupDto(1L,"Test name");
+        return new GroupDto(1L, "Test name");
     }
 
     @PutMapping(value = "{groupId}")

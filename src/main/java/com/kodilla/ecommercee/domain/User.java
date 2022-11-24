@@ -9,12 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-
 @Getter
 @AllArgsConstructor
 @Entity
 public class User {
-
     @Id
     @GeneratedValue
     @NotNull
@@ -30,5 +28,7 @@ public class User {
     private Boolean isBlocked;
 
     private Long userKey;
-}
 
+    public User() {
+    }
+}

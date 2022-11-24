@@ -33,6 +33,4 @@ public class UserController {
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         return ResponseEntity.ok((new UserDto(1L, "JohnyWick78", "Martin", "Smith", false, 141L)));
     }
-
-
 }
