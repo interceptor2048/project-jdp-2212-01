@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
+@Entity(name = "USERS")
+@NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class User {
     @Id
     @GeneratedValue
@@ -28,7 +30,4 @@ public class User {
     private Boolean isBlocked;
 
     private Long userKey;
-
-    public User() {
-    }
 }
