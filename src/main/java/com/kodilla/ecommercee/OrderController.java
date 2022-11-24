@@ -22,7 +22,7 @@ public class OrderController {
 
     @GetMapping(value = "{orderId}")
     public OrderDto getOrder(@PathVariable Long orderId) {
-        return new OrderDto(1L, 1L, Optional.of(LocalDateTime.now()), CartStatus.ORDER);
+        return new OrderDto(1L, 1L, LocalDateTime.now(), CartStatus.ORDER);
     }
 
     @DeleteMapping
@@ -32,7 +32,7 @@ public class OrderController {
 
     @PutMapping(value = "{orderId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto updateOrder(@PathVariable Long orderId, @RequestBody OrderDto orderDto) {
-        return new OrderDto(1L, 1L, Optional.of(LocalDateTime.now()), CartStatus.ORDER);
+        return new OrderDto(1L, 1L, LocalDateTime.now(), CartStatus.ORDER);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
