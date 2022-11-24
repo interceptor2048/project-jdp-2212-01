@@ -1,12 +1,15 @@
 package com.kodilla.ecommercee.domain;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CART_ITEM")
@@ -20,5 +23,15 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "ORDER_ID")
-    Order order;
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
+
+    @Column(name = "QUANTITY")
+    private long quantity;
+
+    @Column(name = "UNITPRICE")
+    private BigDecimal unitPrice;
 }
