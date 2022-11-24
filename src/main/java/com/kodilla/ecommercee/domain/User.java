@@ -11,9 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
+@Entity(name = "USERS")
 public class User {
     @Id
     @GeneratedValue
