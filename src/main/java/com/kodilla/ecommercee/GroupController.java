@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.domain.dto.GroupDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,18 +12,18 @@ import java.util.List;
 public class GroupController {
 
     @GetMapping
-    public List<GroupDto> getGroups() {
-        return new ArrayList<>();
+    public ResponseEntity<List<GroupDto>> getGroups() {
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
     @PostMapping
-    public void addGroup(GroupDto groupDto) {
-
+    public ResponseEntity<Void> addGroup(GroupDto groupDto) {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "{groupId}")
-    public GroupDto getGroup(@PathVariable Long groupId) {
-        return new GroupDto(1L,"Test name");
+    public ResponseEntity<GroupDto> getGroup(@PathVariable Long groupId) {
+        return ResponseEntity.ok(new GroupDto(1L,"Test name"));
     }
 
     @PutMapping(value = "{groupId}")
