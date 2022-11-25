@@ -16,4 +16,9 @@ public class OrderDto {
     private Long id;
     private Long userId;
     private LocalDateTime dateTime;
+<<<<<<< HEAD
     private CartStatus cartStatus;
+=======
+    private CartStatus cartStatus;
+}
+>>>>>>> origin/master
