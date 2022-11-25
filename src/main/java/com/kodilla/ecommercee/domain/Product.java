@@ -18,6 +18,6 @@ public class Product {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "group_group_id")
+    @JoinColumn(name = "GROUP_ID")
     private Group group;
 }
