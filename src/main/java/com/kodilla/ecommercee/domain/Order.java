@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +19,7 @@ public class Order {
     @Id
     @GeneratedValue
     @NotNull
-    @Column (name = "ID")
+    @Column(name = "ID")
     private Long id;
 
     @ManyToOne
@@ -38,25 +36,5 @@ public class Order {
             mappedBy = "order",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<CartItem> products = new ArrayList<>();
-
-    public void addProduct(Product product) {
-        CartItem cartItem = new CartItem(this, product);
-        products.add(cartItem);
-        product.getCarts().add(cartItem);
-    }
-
-    public void removeProduct(Product product) {
-        for (Iterator<CartItem> iterator = products.iterator();
-             iterator.hasNext();) {
-            CartItem cartItem = iterator.next();
-
-            if(cartItem.getOrder().equals(this) && cartItem.getProduct().equals(product)) {
-                iterator.remove();
-                cartItem.getProduct().getCarts().remove(cartItem);
-                cartItem.setOrder(null);
-                cartItem.setProduct(null);
-            }
-        }
-    }
+    private Set<CartItem> products = new HashSet<>();
 }

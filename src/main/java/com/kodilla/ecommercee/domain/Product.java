@@ -3,12 +3,17 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static org.hibernate.annotations.FetchMode.SELECT;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +32,8 @@ public class Product {
             mappedBy = "product",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<CartItem> carts = new ArrayList<>();
+    @Fetch(value = SELECT)
+    private Set<CartItem> carts = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
@@ -42,7 +48,8 @@ public class Product {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    public Product(Group group, String name, String desription, BigDecimal price) {
+    public Product(long id, Group group, String name, String desription, BigDecimal price) {
+        this.id = id;
         this.group = group;
         this.name = name;
         this.desription = desription;

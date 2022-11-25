@@ -6,12 +6,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GROUPS")
+@Table(name = "GRUP")
 public class Group {
 
     @Id
@@ -19,4 +22,18 @@ public class Group {
     @NotNull
     @Column(name = "GROUP_ID")
     private long id;
+
+    @OneToMany(targetEntity = Product.class,
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Product> products = new ArrayList<>();
+
+    @Column(name = "NUMBER")
+    private int number;
+
+    public Group(List<Product> products, int number) {
+        this.products = products;
+        this.number = number;
+    }
 }
