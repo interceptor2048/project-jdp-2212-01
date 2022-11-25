@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/groups")
 public class GroupController {
-
     @Autowired
     private GroupRepository groupRepository;
 

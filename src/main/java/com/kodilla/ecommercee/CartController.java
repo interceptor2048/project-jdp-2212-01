@@ -63,7 +63,7 @@ public class CartController {
         Order order = cartRepository.findById(cardId).orElseThrow(Exception::new);
         User user = userRepository.findById(userId).orElseThrow(Exception::new);
 
-        OrderDto toReturn = new OrderDto(order.getId(), user.getId(), Optional.ofNullable(order.getDateTime()), CartStatus.ORDER);
+        OrderDto toReturn = new OrderDto(order.getId(), user.getUserId(), Optional.ofNullable(order.getDateTime()), CartStatus.ORDER);
 
         return ResponseEntity.ok().build();
     }
