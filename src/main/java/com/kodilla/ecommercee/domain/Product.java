@@ -1,9 +1,10 @@
 package com.kodilla.ecommercee.domain;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 
 @Data
 @AllArgsConstructor
