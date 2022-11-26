@@ -23,11 +23,15 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-<<<<<<<<< Temporary merge branch 1
+
     runtimeOnly 'mysql:mysql-connector-java'
-=========
+
     implementation("com.mysql:mysql-connector-j:8.0.31")
->>>>>>>>> Temporary merge branch 2
+
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    implementation("com.mysql:mysql-connector-j:8.0.31")
+
 }
 
 tasks.named('test') {

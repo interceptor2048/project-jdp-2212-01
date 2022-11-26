@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-package com.kodilla.ecommercee.product.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-public class Product {
-    private int id;
-    private  String name;
-    private String description;
-    private int price;
-    private String groupId;
-=======
 package com.kodilla.ecommercee.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import com.sun.istack.NotNull;
+import lombok.*;
 
+import javax.persistence.*;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Product {
 
@@ -27,5 +18,9 @@ public class Product {
     @NotNull
     @Column(name = "PRODUCT_ID")
     private long id;
->>>>>>> origin/master
+
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
+
 }
