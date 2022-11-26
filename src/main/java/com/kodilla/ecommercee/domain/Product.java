@@ -8,9 +8,7 @@ import org.hibernate.annotations.Fetch;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.hibernate.annotations.FetchMode.SELECT;

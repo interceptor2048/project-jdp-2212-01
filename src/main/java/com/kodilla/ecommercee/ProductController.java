@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.repository.GroupRepository;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 import java.util.List;
 
 @RequestMapping("/v1/products")

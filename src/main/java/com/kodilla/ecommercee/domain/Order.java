@@ -1,13 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
+import java.time.LocalDateTime;
+
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @NoArgsConstructor

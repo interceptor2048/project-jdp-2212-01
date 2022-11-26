@@ -10,10 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
 @Data
+@Entity(name = "USERS")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -32,4 +32,3 @@ public class User {
 
     private Long userKey;
 }
-

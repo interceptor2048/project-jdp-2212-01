@@ -17,18 +17,18 @@ public class GroupController {
     private GroupRepository groupRepository;
 
     @GetMapping
-    public List<GroupDto> getGroups() {
-        return new ArrayList<>();
+    public ResponseEntity<List<GroupDto>> getGroups() {
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
     @PostMapping
-    public void addGroup(GroupDto groupDto) {
-
+    public ResponseEntity<Void> addGroup(GroupDto groupDto) {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "{groupId}")
-    public GroupDto getGroup(@PathVariable Long groupId) {
-        return new GroupDto(1L, "Test name");
+    public ResponseEntity<GroupDto> getGroup(@PathVariable Long groupId) {
+        return ResponseEntity.ok(new GroupDto(1L, "Test name"));
     }
 
     @PutMapping(value = "{groupId}")
