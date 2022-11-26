@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.*;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Product {
 
@@ -14,4 +16,8 @@ public class Product {
     @NotNull
     @Column(name = "PRODUCT_ID")
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
 }
