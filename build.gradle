@@ -28,10 +28,10 @@ dependencies {
 
     implementation("com.mysql:mysql-connector-j:8.0.31")
 
+
     runtimeOnly 'mysql:mysql-connector-java'
 
     implementation("com.mysql:mysql-connector-j:8.0.31")
-
 }
 
 tasks.named('test') {
