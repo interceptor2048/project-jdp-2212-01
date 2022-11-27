@@ -1,12 +1,19 @@
 package com.kodilla.ecommercee.domain;
 
+import com.sun.istack.NotNull;
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +24,9 @@ import static org.hibernate.annotations.FetchMode.SELECT;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Setter
+@Getter
+
 @Table(name = "PRODUCT")
 public class Product {
 
@@ -25,6 +35,20 @@ public class Product {
     @NotNull
     @Column(name = "PRODUCT_ID")
     private long id;
+    @Column(name="NAME")
+    private  String name;
+
+    @Column(name="PRICE")
+    private BigDecimal price;
+    @Column(name="GROUPID")
+    private String groupId;
+    @OneToMany(
+            targetEntity = CartItem.class,
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<CartItem> cartItems =new ArrayList<>();
 
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "product",
@@ -37,20 +61,20 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-    @Column(name = "PRODUCT_NAME")
-    private String name;
+
 
     @Column(name = "DESCRIPTION")
-    private String desription;
+    private String description;
 
-    @Column(name = "PRICE")
-    private BigDecimal price;
 
-    public Product(long id, Group group, String name, String desription, BigDecimal price) {
+    public Product(long id, Group group, String name, String description, BigDecimal price) {
         this.id = id;
         this.group = group;
         this.name = name;
-        this.desription = desription;
+        this.description = description;
         this.price = price;
+    }
+
+    public <E> Product(int i, HashSet<E> es, Object o, String kurtka_modify, String s, BigDecimal bigDecimal) {
     }
 }
