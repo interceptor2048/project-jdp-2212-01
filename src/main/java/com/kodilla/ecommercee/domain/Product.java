@@ -27,8 +27,6 @@ import static org.hibernate.annotations.FetchMode.SELECT;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Setter
-@Getter
 
 @Table(name = "PRODUCT")
 public class Product {
@@ -43,8 +41,7 @@ public class Product {
 
     @Column(name="PRICE")
     private BigDecimal price;
-    @Column(name="GROUPID")
-    private String groupId;
+
     @OneToMany(
             targetEntity = CartItem.class,
             mappedBy = "product",
