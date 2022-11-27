@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -78,9 +77,4 @@ public class Product {
         this.description = description;
         this.price = price;
     }
-
-
-    public <E> Product(int i, HashSet<E> es, Object o, String kurtka_modify, String s, BigDecimal bigDecimal) {
-    }
-
 }
