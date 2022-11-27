@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import lombok.*;
+
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -21,17 +24,36 @@ public class CartItem {
     @Column(name = "CART_ITEM_ID")
     private long id;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
+    @Column(name = "PRODUCT_NAME")
+    private String productName;
+
+    @Column(name = "UNIT_PRICE")
+    private BigDecimal unitPrice;
+
     @Column(name = "QUANTITY")
     private long quantity;
 
-    @Column(name = "UNITPRICE")
-    private BigDecimal unitPrice;
+    @Column(name = "TOTAL_PRICE")
+    private BigDecimal totalPrice;
+
+    public CartItem(Order order, Product product, String productName, BigDecimal unitPrice, long quantity, BigDecimal totalPrice) {
+        this.unitPrice = unitPrice;
+        this.productName = productName;
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
 }

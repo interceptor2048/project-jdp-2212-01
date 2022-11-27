@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.CartStatus;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/orders")
@@ -27,7 +26,6 @@ public class OrderController {
 
     @DeleteMapping
     public void deleteOrder(Long orderId) {
-
     }
 
     @PutMapping(value = "{orderId}", consumes = MediaType.APPLICATION_JSON_VALUE)
