@@ -39,8 +39,6 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-
-
     @Column(name = "PRODUCT_NAME")
     private String name;
 
