@@ -1,11 +1,11 @@
 package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
-import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class Order {
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "order",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     private List<CartItem> cartItems = new ArrayList<>();
 
 }
