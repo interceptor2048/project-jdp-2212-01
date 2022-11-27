@@ -1,21 +1,17 @@
-package com.kodilla.ecommercee.domain.dto;
+package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.domain.CartStatus;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
-@Data
 @Getter
-@Setter
 @AllArgsConstructor
 public class OrderDto {
 
     private Long id;
     private Long userId;
-    private LocalDateTime dateTime;
+    private Optional<LocalDateTime> dateTime;
     private CartStatus cartStatus;
 }

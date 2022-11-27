@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.UserDto;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +33,4 @@ public class UserController {
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         return ResponseEntity.ok((new UserDto(1L, "JohnyWick78", "Martin", "Smith", false, 141L)));
     }
-
-
 }
