@@ -1,25 +1,25 @@
 package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
+
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @Entity(name = "ORDERS")
 public class Order {
 
     @Id
     @GeneratedValue
     @NotNull
-    @Column (name = "ID")
+    @Column(name = "ID")
     private Long id;
 
     @ManyToOne
@@ -36,6 +36,5 @@ public class Order {
             mappedBy = "order",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<CartItem> cartItems = new ArrayList<>();
-
+    private Set<CartItem> products = new HashSet<>();
 }
