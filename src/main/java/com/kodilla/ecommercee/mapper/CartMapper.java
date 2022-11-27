@@ -32,7 +32,7 @@ public class CartMapper {
                 cartItem.getProduct().getId(),
                 null,
                 cartItem.getProduct().getName(),
-                cartItem.getProduct().getDesription(),
+                cartItem.getProduct().getDescription(),
                 cartItem.getProduct().getPrice());
     }
 
