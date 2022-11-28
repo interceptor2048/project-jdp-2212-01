@@ -43,5 +43,5 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> users = new ArrayList<>();
 }
