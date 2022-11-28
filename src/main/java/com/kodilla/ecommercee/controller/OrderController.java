@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.CartStatus;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
@@ -26,7 +26,6 @@ public class OrderController {
 
     @DeleteMapping
     public void deleteOrder(Long orderId) {
-
     }
 
     @PutMapping(value = "{orderId}", consumes = MediaType.APPLICATION_JSON_VALUE)
