@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.CartStatus;
+import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -21,7 +23,7 @@ public class OrderController {
 
     @GetMapping(value = "{orderId}")
     public OrderDto getOrder(@PathVariable Long orderId) {
-        return new OrderDto(1L, 1L, LocalDateTime.now(), CartStatus.ORDER);
+        return new OrderDto(1L, new User(), LocalDateTime.now(), CartStatus.ORDER, new HashSet<>());
     }
 
     @DeleteMapping
@@ -30,7 +32,7 @@ public class OrderController {
 
     @PutMapping(value = "{orderId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto updateOrder(@PathVariable Long orderId, @RequestBody OrderDto orderDto) {
-        return new OrderDto(1L, 1L, LocalDateTime.now(), CartStatus.ORDER);
+        return new OrderDto(1L, new User(), LocalDateTime.now(), CartStatus.ORDER, new HashSet<>());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
