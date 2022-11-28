@@ -2,20 +2,11 @@
 package com.kodilla.ecommercee.domain;
 
 import com.sun.istack.NotNull;
-
-import lombok.*;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
-
-import javax.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
