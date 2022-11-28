@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.repository.GroupRepository;
@@ -45,7 +46,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> createProduct() {
-        Product product = new Product(1, new HashSet<>(), null, "kurtka MODIFY", "Pellentesque tempus...", new BigDecimal(10));
+        Product product = new Product(1L,new Group(), "kurtka MODIFY", "Pellentesque tempus...", new BigDecimal(10));
         return ResponseEntity.ok(productRepository.save(product));
     }
 }
