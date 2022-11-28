@@ -59,12 +59,12 @@ public class CartTestSuit {
         //Given
         Order cart = new Order();
         CartItem cartItem = new CartItem();
-        cart.getProducts().add(cartItem);
+        cart.getCartItems().add(cartItem);
 
         //When
         cartRepository.save(cart);
         long id = cart.getId();
-        int n = cart.getProducts().size();
+        int n = cart.getCartItems().size();
 
         //Then
         assertEquals(1, n);

@@ -2,11 +2,11 @@ package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
 
+
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -35,6 +35,6 @@ public class Order {
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "order",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private Set<CartItem> products = new HashSet<>();
+            fetch = FetchType.EAGER)
+    private Set<CartItem> cartItems = new HashSet<>();
 }
