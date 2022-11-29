@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public class CartController {
         Order order = cartRepository.findById(cardId).orElseThrow(Exception::new);
         User user = userRepository.findById(userId).orElseThrow(Exception::new);
 
-        OrderDto toReturn = new OrderDto(order.getId(), user, order.getDateTime(), CartStatus.ORDER, new HashSet<>());
+        OrderDto toReturn = new OrderDto(order.getId(), user, order.getDateTime(), CartStatus.ORDER, new ArrayList<>());
 
         return ResponseEntity.ok().build();
     }
