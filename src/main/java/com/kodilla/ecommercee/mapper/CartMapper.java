@@ -5,9 +5,6 @@ import com.kodilla.ecommercee.domain.CartStatus;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.CartDto;
-import com.kodilla.ecommercee.domain.dto.CartItemDto;
-import com.kodilla.ecommercee.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -28,12 +25,12 @@ public class CartMapper {
     }
 
     public Product mapCartItemToProduct(final CartItem cartItem) {
-        return new Product(
-                cartItem.getProduct().getId(),
-                null,
+        return new Product(1L,
                 cartItem.getProduct().getName(),
                 cartItem.getProduct().getDescription(),
-                cartItem.getProduct().getPrice());
+                cartItem.getProduct().getPrice(),
+                new HashSet<>(),
+                null);
     }
 
     public List<Product> mapToProductList(final List<CartItem> productList) {

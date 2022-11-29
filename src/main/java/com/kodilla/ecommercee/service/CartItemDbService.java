@@ -3,6 +3,8 @@ package com.kodilla.ecommercee.service;
 import com.kodilla.ecommercee.domain.CartItem;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.exception.CartNotFoundException;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.repository.CartItemRepository;
 import com.kodilla.ecommercee.repository.CartRepository;
@@ -23,13 +25,13 @@ public class CartItemDbService {
     private final CartMapper cartMapper;
 
     public List<CartItem> getProductsList(Long cartId) throws Exception {
-        Order cart = cartRepository.findById(cartId).orElseThrow(Exception::new);
+        Order cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
         return cartMapper.mapToAllProducts(cartItemRepository.findAllByOrder(cart));
     }
 
     public CartItem addProduct(Long cartId, Long productId) throws Exception {
-        Product product = productRepository.findById(productId).orElseThrow(Exception::new);
-        Order cart = cartRepository.findById(cartId).orElseThrow(Exception::new);
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
+        Order cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
         long count = 1;
 
         List<CartItem> cartItem = cartItemRepository.findAllByOrderAndProduct(cart, product);
@@ -48,8 +50,8 @@ public class CartItemDbService {
     }
 
     public void removeProduct(Long cartId, Long productId) throws Exception {
-        Order cart = cartRepository.findById(cartId).orElseThrow(Exception::new);
-        Product product = productRepository.findById(productId).orElseThrow(Exception::new);
+        Order cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
 
         List<CartItem> cartItemList = cartItemRepository.findAllByOrderAndProduct(cart, product);
         if (cartItemList.size() == 1) {
