@@ -4,9 +4,8 @@ import java.time.LocalDateTime;
 
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -32,9 +31,13 @@ public class Order {
     @Column(name = "STATUS")
     private CartStatus cartStatus = CartStatus.CART;
 
-    @OneToMany(targetEntity = CartItem.class,
-            mappedBy = "order",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = CartItem.class, mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<CartItem> cartItems = new HashSet<>();
+
+    public Order(User user, LocalDateTime dateTime, CartStatus cartStatus, Set<CartItem> cartItems) {
+        this.user = user;
+        this.dateTime = dateTime;
+        this.cartStatus = cartStatus;
+        this.cartItems = cartItems;
+    }
 }

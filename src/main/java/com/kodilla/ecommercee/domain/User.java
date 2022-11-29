@@ -5,9 +5,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,4 +40,13 @@ public class User {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Order> users = new ArrayList<>();
+
+    public User(String username, String firstName, String lastName, Boolean isBlocked, Long userKey, List<Order> users) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isBlocked = isBlocked;
+        this.userKey = userKey;
+        this.users = users;
+    }
 }
