@@ -2,7 +2,7 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
-import com.kodilla.ecommercee.exception.IllegalIdForOrderUpdateException;
+import com.kodilla.ecommercee.exception.IllegalIdForOrderCreateException;
 import com.kodilla.ecommercee.exception.OrderNotFoundException;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.OrderDbService;
@@ -46,9 +46,9 @@ public class OrderController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto) throws IllegalIdForOrderUpdateException {
+    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto) throws IllegalIdForOrderCreateException {
         if (orderDto.getId() > 0) {
-            throw new IllegalIdForOrderUpdateException();
+            throw new IllegalIdForOrderCreateException();
         }
         Order order = orderMapper.mapToOrder(orderDto);
         dbService.saveOrder(order);
