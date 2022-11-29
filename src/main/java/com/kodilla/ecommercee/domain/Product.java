@@ -3,22 +3,17 @@ package com.kodilla.ecommercee.domain;
 
 import com.sun.istack.NotNull;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
+
+import lombok.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.hibernate.annotations.FetchMode.SELECT;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 @Table(name = "PRODUCT")
 public class Product {
 
@@ -40,11 +35,19 @@ public class Product {
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "product",
             cascade = CascadeType.ALL,
+            orphanRemoval = true,
             fetch = FetchType.LAZY)
-    @Fetch(value = SELECT)
     private Set<CartItem> carts = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private Group group;
+
+    public Product(String name, String description, BigDecimal price, Set<CartItem> carts, Group group) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.carts = carts;
+        this.group = group;
+    }
 }
