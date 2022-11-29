@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@Transactional
 public class CartControllerTestSuit {
 
     @Autowired
@@ -36,6 +38,7 @@ public class CartControllerTestSuit {
     private GroupRepository groupRepository;
     @Autowired
     private ProductRepository productRepository;
+
 
     @Test
     void testCreateEmptyCart() {

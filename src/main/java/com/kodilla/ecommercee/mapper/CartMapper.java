@@ -25,7 +25,7 @@ public class CartMapper {
     }
 
     public Product mapCartItemToProduct(final CartItem cartItem) {
-        return new Product(1L,
+        return new Product(cartItem.getProduct().getId(),
                 cartItem.getProduct().getName(),
                 cartItem.getProduct().getDescription(),
                 cartItem.getProduct().getPrice(),
