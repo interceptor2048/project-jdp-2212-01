@@ -2,7 +2,6 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
-import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
@@ -55,7 +54,7 @@ public class CartController {
     }
 
     @PostMapping(value = "createOrder/{cardId}/{userId}")
-    public ResponseEntity<OrderDto> createOrderFromCart(@PathVariable Long cardId, @PathVariable Long userId) throws Exception {
+    public ResponseEntity<Order> createOrderFromCart(@PathVariable Long cardId, @PathVariable Long userId) throws Exception {
         return ResponseEntity.ok(cartDbService.createOrder(cardId, userId));
     }
 }
