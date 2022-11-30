@@ -1,9 +1,9 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.*;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +26,14 @@ public class User {
     @Column(name = "FIRSTNAME")
     private String firstName;
 
+    @Column(name = "USERKEY")
+    private Long userKey;
+
     @Column(name = "LASTNAME")
     private String lastName;
 
     @Column(name = "ACCOUNT_BLOCKED")
     private Boolean isBlocked;
-
-    @Column(name = "USERKEY")
-    private Long userKey;
 
     @OneToMany(targetEntity = Order.class,
             mappedBy = "user",
