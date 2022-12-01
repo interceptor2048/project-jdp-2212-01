@@ -17,6 +17,7 @@ public class OrderMapper {
 
     public Order mapToOrder (final OrderDto orderDto) {
 
+        Order order = new Order();
         Set<Product> uniqueProducts = new HashSet<>(orderDto.getProductList());
         Set<CartItem> cartItems = new HashSet<>();
 
@@ -27,15 +28,15 @@ public class OrderMapper {
                     .filter(p -> p.equals(product))
                     .count());
             cartItem.setUnitPrice(product.getPrice());
+            cartItem.setOrder(order);
         }
 
-        return new Order(
-                orderDto.getId(),
-                orderDto.getUser(),
-                orderDto.getDateTime(),
-                orderDto.getCartStatus(),
-                cartItems
-        );
+        order.setId(orderDto.getId());
+        order.setDateTime(orderDto.getDateTime());
+        order.setCartStatus(orderDto.getCartStatus());
+        order.setUser(orderDto.getUser());
+        order.setCartItems(cartItems);
+        return order;
     }
 
     public OrderDto mapToOrderDto (final Order order) {
