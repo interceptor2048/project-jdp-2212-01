@@ -33,7 +33,7 @@ public class GroupController {
 
     @PutMapping(value = "{groupId}")
     public ResponseEntity<Group> updateGroup(@PathVariable Long groupId) {
-        Group group = new Group(new ArrayList<>(), 2);
+        Group group = new Group();
         groupRepository.save(group);
         return ResponseEntity.ok(group);
     }
