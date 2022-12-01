@@ -46,7 +46,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> createProduct() {
-        Product product = new Product(1L,new Group(), "kurtka MODIFY", "Pellentesque tempus...", new BigDecimal(10));
+        Product product = new Product(1L, "kurtka MODIFY", "Pellentesque tempus...", new BigDecimal(10), new HashSet<>(), null);
         return ResponseEntity.ok(productRepository.save(product));
     }
 }
