@@ -5,7 +5,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
+import java.util.List;
+
 @Transactional
-public interface CartRepository extends CrudRepository<Order, Long> {
+@Repository
+public interface OrderRepository extends CrudRepository<Order, Long> {
+
+    List<Order> findAll();
 }
