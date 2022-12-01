@@ -2,8 +2,13 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
+import com.kodilla.ecommercee.exception.GroupNotFoundException;
+import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.repository.GroupRepository;
+import com.kodilla.ecommercee.service.GroupDbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,28 +18,38 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/groups")
 public class GroupController {
+
+    @Autowired
+    private GroupDbService groupDbService;
+
+    @Autowired
+    private GroupMapper groupMapper;
+
     @Autowired
     private GroupRepository groupRepository;
 
     @GetMapping
     public ResponseEntity<List<GroupDto>> getGroups() {
-        return ResponseEntity.ok(new ArrayList<>());
+        List<Group> groups = groupDbService.getAllGroups();
+        return ResponseEntity.ok(groupMapper.mapToGroupDtoList(groups));
     }
 
-    @PostMapping
-    public ResponseEntity<Void> addGroup(GroupDto groupDto) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> addGroup(@RequestBody GroupDto groupDto) {
+        Group group = groupMapper.mapToGroup(groupDto);
+        groupDbService.saveGroup(group);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "{groupId}")
-    public ResponseEntity<GroupDto> getGroup(@PathVariable Long groupId) {
-        return ResponseEntity.ok(new GroupDto(1L, "Test name"));
+    public ResponseEntity<GroupDto> getGroup(@PathVariable Long groupId) throws GroupNotFoundException{
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(groupDbService.getGroup(groupId)));
     }
 
-    @PutMapping(value = "{groupId}")
-    public ResponseEntity<Group> updateGroup(@PathVariable Long groupId) {
-        Group group = new Group(new ArrayList<>(), 2);
-        groupRepository.save(group);
-        return ResponseEntity.ok(group);
+    @PutMapping
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
+        Group group = groupMapper.mapToGroup(groupDto);
+        Group saveGroup = groupDbService.saveGroup(group);
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(saveGroup));
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GRUP")
+@Table(name = "GRUPS")
 public class Group {
 
     @Id
@@ -30,11 +30,11 @@ public class Group {
             fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
-    @Column(name = "NUMBER")
-    private int number;
+    @Column(name = "NAME")
+    private String groupName;
 
-    public Group(List<Product> products, int number) {
+    public Group(List<Product> products, String groupName) {
         this.products = products;
-        this.number = number;
+        this.groupName = groupName;
     }
 }
