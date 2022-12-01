@@ -12,12 +12,8 @@ public class CartItemDto {
     private long id;
     private long product_id;
     private long order_id;
-
     private long quantity;
-
-    private long unit_Price;
-    private String productName;
-
     private BigDecimal unitPrice;
+    private String productName;
     private BigDecimal totalPrice;
 }

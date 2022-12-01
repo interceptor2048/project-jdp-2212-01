@@ -37,5 +37,4 @@ public class OrderController {
     public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto) {
         return ResponseEntity.ok().build();
     }
-
 }
