@@ -5,6 +5,7 @@ import com.kodilla.ecommercee.domain.dto.GroupDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GroupMapper {
@@ -28,7 +29,6 @@ public class GroupMapper {
     public List<GroupDto> mapToGroupDtoList(final List<Group> groupList) {
         return groupList.stream()
                 .map(this::mapToGroupDto)
-                .toList();
+                .collect(Collectors.toList());
     }
-
 }
