@@ -51,5 +51,6 @@ public class GroupController {
         Group group = groupMapper.mapToGroup(groupDto);
         Group saveGroup = groupDbService.saveGroup(group);
         return ResponseEntity.ok(groupMapper.mapToGroupDto(saveGroup));
+
     }
 }

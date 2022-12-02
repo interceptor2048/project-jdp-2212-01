@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GRUPS")
+@Table(name = "\"GROUPS\"")
 public class Group {
 
     @Id
@@ -24,15 +24,15 @@ public class Group {
     @Column(name = "GROUP_ID")
     private long id;
 
+    @Column(name = "NAME")
+    private String groupName;
+
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
-
-    @Column(name = "NAME")
-    private String groupName;
-
+    
     public Group(List<Product> products, String groupName) {
         this.products = products;
         this.groupName = groupName;

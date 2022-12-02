@@ -21,5 +21,4 @@ public class UserDto {
     private Boolean isBlocked;
 
     private Long userKey;
-
 }

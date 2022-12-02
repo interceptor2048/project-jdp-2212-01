@@ -1,12 +1,11 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
+import lombok.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import lombok.*;
-
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -24,12 +23,14 @@ public class CartItem {
     @Column(name = "CART_ITEM_ID")
     private long id;
 
+    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
+    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne

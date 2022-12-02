@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.repository.GroupRepository;
@@ -31,7 +30,7 @@ public class ProductController {
 
     @GetMapping(value = "{productId}")
     public ProductDto getProduct(@PathVariable Long productId) {
-        return new ProductDto(1, "kurtka zimowa", "Pellentesque tempus...", 100, "1");
+        return new ProductDto(1, "kurtka zimowa", "Pellentesque tempus...", new BigDecimal(100), "1");
     }
 
     @DeleteMapping(value = "{productId}")
@@ -41,12 +40,12 @@ public class ProductController {
 
     @PutMapping(value = "{productId}")
     public ProductDto updateProduct(@PathVariable Long productId) {
-        return new ProductDto(1, "kurtka MODIFY", "Pellentesque tempus...", 100, "1");
+        return new ProductDto(1, "kurtka MODIFY", "Pellentesque tempus...", new BigDecimal(100), "1");
     }
 
     @PostMapping
     public ResponseEntity<Product> createProduct() {
-        Product product = new Product(1L,new Group(), "kurtka MODIFY", "Pellentesque tempus...", new BigDecimal(10));
+        Product product = new Product(1L, "kurtka MODIFY", "Pellentesque tempus...", new BigDecimal(10), new HashSet<>(), null);
         return ResponseEntity.ok(productRepository.save(product));
     }
 }
