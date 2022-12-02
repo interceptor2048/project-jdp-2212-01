@@ -33,4 +33,10 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleOrderNotFoundException(OrderNotFoundException exception) {
         return new ResponseEntity<>("Order with given id doesn't exist", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalIdForOrderCreateException.class)
+    public ResponseEntity<Object> handleOrderAlreadyExistsException (IllegalIdForOrderCreateException exception) {
+        return new ResponseEntity<>("Illegal order id. Set id = 0 to create new order," +
+                " or use PUT method to update existing order.", HttpStatus.BAD_REQUEST);
+    }
 }
