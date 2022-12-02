@@ -33,7 +33,7 @@ public class Group {
             fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
     
-    public Group(List<Product> products, String groupName) {
+    public Group( String groupName, List<Product> products) {
         this.products = products;
         this.groupName = groupName;
     }
