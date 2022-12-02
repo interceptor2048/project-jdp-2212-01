@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.kodilla'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 16
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -28,4 +28,3 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-targetCompatibility = JavaVersion.VERSION_16
