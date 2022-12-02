@@ -24,14 +24,17 @@ public class Group {
     @Column(name = "GROUP_ID")
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String groupName;
 
-    @OneToMany(targetEntity = Product.class, mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Product> product = new ArrayList<>();
-
-    public Group(String groupName, List<Product> product) {
+    @OneToMany(targetEntity = Product.class,
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Product> products = new ArrayList<>();
+    
+    public Group( String groupName, List<Product> products) {
+        this.products = products;
         this.groupName = groupName;
-        this.product = product;
     }
 }
