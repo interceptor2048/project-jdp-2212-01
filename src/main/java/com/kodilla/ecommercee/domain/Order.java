@@ -2,7 +2,6 @@ package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
