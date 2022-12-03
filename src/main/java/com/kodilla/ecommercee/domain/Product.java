@@ -2,8 +2,8 @@
 package com.kodilla.ecommercee.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.*;
 import java.math.BigDecimal;

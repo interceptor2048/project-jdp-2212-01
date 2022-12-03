@@ -33,4 +33,14 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleOrderNotFoundException(OrderNotFoundException exception) {
         return new ResponseEntity<>("Order with given id doesn't exist", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserWithGivenUserNameExist.class)
+    public ResponseEntity<Object> handleUserWithGivenUserNameExist(UserWithGivenUserNameExist exception) {
+        return new ResponseEntity<>("username is taken, choose another one", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserDoesntExist.class)
+    public ResponseEntity<Object> handleUserDoesntExist(UserDoesntExist exception) {
+        return new ResponseEntity<>("invalid login or password", HttpStatus.BAD_REQUEST);
+    }
 }
