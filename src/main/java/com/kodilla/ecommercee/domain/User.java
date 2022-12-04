@@ -39,6 +39,7 @@ public class User {
 
     @Column(name = "PASSWORD")
     private String password;
+
     @OneToMany(targetEntity = Order.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
