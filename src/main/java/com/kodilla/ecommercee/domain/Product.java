@@ -33,6 +33,7 @@ public class Product {
 
     @Column(name="PRICE")
     private BigDecimal price;
+
     @JsonManagedReference
     @Column(name="CARTS")
     @OneToMany(targetEntity = CartItem.class,
