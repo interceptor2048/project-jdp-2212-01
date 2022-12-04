@@ -1,6 +1,7 @@
 
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import javax.persistence.*;
 
@@ -32,7 +33,8 @@ public class Product {
 
     @Column(name="PRICE")
     private BigDecimal price;
-
+    @JsonManagedReference
+    @Column(name="CARTS")
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "product",
             cascade = CascadeType.ALL,
@@ -43,13 +45,12 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-
-    public Product(String name, String description, BigDecimal price, Set<CartItem> carts, Group group) {
+    public Product( String name, String description, BigDecimal price, Set<CartItem> carts, Group group) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.carts = carts;
         this.group = group;
     }
-
 }
+

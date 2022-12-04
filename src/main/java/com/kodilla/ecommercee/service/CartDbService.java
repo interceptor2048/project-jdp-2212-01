@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +30,6 @@ public class CartDbService {
         Order order = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
-        return new OrderDto(order.getId(), user.getUserId(), LocalDateTime.now(), CartStatus.ORDER);
+        return new OrderDto(order.getId(), user.getUserId(), LocalDateTime.now(), CartStatus.ORDER,new HashSet<>());
     }
 }

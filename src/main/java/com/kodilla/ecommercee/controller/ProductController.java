@@ -48,7 +48,6 @@ public class ProductController {
                  "",new BigDecimal(1),new HashSet<>(),new Group()), HttpStatus.BAD_REQUEST);
         }
     }
-
     @DeleteMapping(value = "{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
         productDbService.deleteProduct(productId);

@@ -16,7 +16,7 @@ public class ProductMapper {
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
-                product.getCarts(),
+                null,
                 product.getGroup());
     }
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
@@ -29,7 +29,7 @@ public class ProductMapper {
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
-                productDto.getCarts(),
-                (Group) productDto.getCarts());
+                null,
+                productDto.getGroup());
     }
 }

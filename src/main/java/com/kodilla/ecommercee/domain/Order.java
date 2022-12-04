@@ -29,6 +29,7 @@ public class Order {
     private LocalDateTime dateTime = LocalDateTime.now();
 
     @Column(name = "STATUS")
+
     private CartStatus cartStatus = CartStatus.CART;
 
     @OneToMany(targetEntity = CartItem.class, mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

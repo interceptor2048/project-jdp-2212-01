@@ -5,6 +5,7 @@ import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
@@ -143,16 +144,34 @@ public class CartControllerTestSuit {
     @Test
     void testCreateOrder() throws Exception {
         //Given
-        User user = new User("User", "Name", "LastName", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
         userRepository.save(user);
-        Order order = new Order(user, LocalDateTime.now(), CartStatus.ORDER, new HashSet<>());
-        cartDbService.saveCart(order);
+        Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
+        cartDbService.saveCart(cart);
+        Group group = new Group("group name", new ArrayList<>());
+        groupRepository.save(group);
+        Product product = new Product("Name", "Description", new BigDecimal(10), new HashSet<>(), group);
+        Product product1 = new Product("Name1", "Description1", new BigDecimal(8), new HashSet<>(), group);
+        Product product2 = new Product("Name2", "Description2", new BigDecimal(15), new HashSet<>(), group);
+        productRepository.save(product);
+        productRepository.save(product1);
+        productRepository.save(product2);
+        cartController.addProduct(cart.getId(), product.getId());
+        cartController.addProduct(cart.getId(), product1.getId());
+        cartController.addProduct(cart.getId(), product2.getId());
+        cartController.addProduct(cart.getId(), product2.getId());
 
         //When
-        ResponseEntity<OrderDto> createOrder = cartController.createOrderFromCart(order.getId(), user.getUserId());
+        ResponseEntity<OrderDto> createOrder = cartController.createOrderFromCart(cart.getId(), user.getUserId());
+        for (CartItem cartItem : Objects.requireNonNull(createOrder.getBody()).getCartItems()) {
+            System.out.println(cartItem);
+        }
 
         //Then
         assertEquals(200, createOrder.getStatusCode().value());
         assertEquals(CartStatus.ORDER, Objects.requireNonNull(createOrder.getBody()).getCartStatus());
+        assertEquals(0, createOrder.getBody().getCartItems().size());
     }
+
+
 }

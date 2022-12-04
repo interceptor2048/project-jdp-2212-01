@@ -17,5 +17,5 @@ public class ProductDto {
     private String description;
     private BigDecimal price;
     private Set<CartItem> carts;
-    private Group groupId;
+    private Group group;
 }

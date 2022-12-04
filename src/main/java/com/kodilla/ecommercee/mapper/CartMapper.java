@@ -30,8 +30,7 @@ public class CartMapper {
                 cartItem.getProduct().getName(),
                 cartItem.getProduct().getDescription(),
                 cartItem.getProduct().getPrice(),
-
-                new HashSet<>(),
+                null,
                 null);
     }
 
