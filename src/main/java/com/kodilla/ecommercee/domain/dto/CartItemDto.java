@@ -1,9 +1,11 @@
 package com.kodilla.ecommercee.domain.dto;
 
+import com.kodilla.ecommercee.domain.CartItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor

@@ -11,6 +11,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,6 +33,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "{orderId}")
+
     public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) throws OrderNotFoundException {
         return ResponseEntity.ok(orderMapper.mapToOrderDto(dbService.getOrder(orderId)));
     }
@@ -43,6 +49,7 @@ public class OrderController {
         Order order = orderMapper.mapToOrder(orderDto);
         Order savedOrder = dbService.saveOrder(order);
         return ResponseEntity.ok(orderMapper.mapToOrderDto(savedOrder));
+
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

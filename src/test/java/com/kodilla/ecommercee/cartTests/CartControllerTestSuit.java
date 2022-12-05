@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.controller.CartController;
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
@@ -160,7 +161,9 @@ public class CartControllerTestSuit {
         cartController.addProduct(cart.getId(), product2.getId());
 
         //When
+
         ResponseEntity<Order> createOrder = cartController.createOrderFromCart(cart.getId(), user.getUserId());
+
         for (CartItem cartItem : Objects.requireNonNull(createOrder.getBody()).getCartItems()) {
             System.out.println(cartItem);
         }
@@ -168,6 +171,11 @@ public class CartControllerTestSuit {
         //Then
         assertEquals(200, createOrder.getStatusCode().value());
         assertEquals(CartStatus.ORDER, Objects.requireNonNull(createOrder.getBody()).getCartStatus());
+
         assertEquals(3, createOrder.getBody().getCartItems().size());
+
+
     }
+
+
 }

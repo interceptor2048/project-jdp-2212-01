@@ -25,7 +25,8 @@ public class Product {
     private long id;
 
     @Column(name="NAME")
-    private  String name;
+    private String name;
+
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -34,18 +35,18 @@ public class Product {
     private BigDecimal price;
 
     @JsonManagedReference
+    @Column(name="CARTS")
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "product",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private Set<CartItem> carts = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-    public Product(String name, String description, BigDecimal price, Set<CartItem> carts, Group group) {
+    public Product( String name, String description, BigDecimal price, Set<CartItem> carts, Group group) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -53,3 +54,4 @@ public class Product {
         this.group = group;
     }
 }
+

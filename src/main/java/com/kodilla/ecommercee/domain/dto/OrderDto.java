@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain.dto;
 
+import com.kodilla.ecommercee.domain.CartItem;
 import com.kodilla.ecommercee.domain.CartStatus;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.User;
@@ -9,6 +10,9 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import java.util.Set;
+
+
 @Data
 @AllArgsConstructor
 public class OrderDto {
@@ -17,6 +21,7 @@ public class OrderDto {
     private User user;
     private LocalDateTime dateTime;
     private CartStatus cartStatus;
+    private Set<CartItem> cartItems;
     private List<Product> productList;
 }
 

@@ -29,6 +29,7 @@ public class Order {
     private LocalDateTime dateTime = LocalDateTime.now();
 
     @Column(name = "STATUS")
+
     private CartStatus cartStatus = CartStatus.CART;
     @JsonManagedReference
     @OneToMany(targetEntity = CartItem.class,
