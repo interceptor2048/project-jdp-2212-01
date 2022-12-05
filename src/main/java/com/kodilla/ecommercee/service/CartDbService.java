@@ -33,6 +33,8 @@ public class CartDbService {
 //        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Set<CartItem> set = new HashSet<>(cartItemRepository.findAllByOrder(order));
 
+
         return cartRepository.save(new Order(null, LocalDateTime.now(), CartStatus.ORDER, set));
+
     }
 }

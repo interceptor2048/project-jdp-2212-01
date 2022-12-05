@@ -51,6 +51,7 @@ public class OrderMapper {
                 order.getUser(),
                 order.getDateTime(),
                 order.getCartStatus(),
+                null,
                 productList
         );
     }

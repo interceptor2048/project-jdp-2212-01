@@ -25,11 +25,12 @@ public class CartMapper {
     }
 
     public Product mapCartItemToProduct(final CartItem cartItem) {
+
         return new Product(cartItem.getProduct().getId(),
                 cartItem.getProduct().getName(),
                 cartItem.getProduct().getDescription(),
                 cartItem.getProduct().getPrice(),
-                new HashSet<>(),
+                null,
                 null);
     }
 
