@@ -5,6 +5,8 @@ import com.kodilla.ecommercee.domain.CartStatus;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,9 +18,11 @@ import java.util.stream.Collectors;
 @Service
 public class CartMapper {
 
+    @Autowired
+    private UserRepository userRepository;
     public Order mapToCart(final CartDto cartDto) {
         return new Order(cartDto.getId(),
-                null,
+                userRepository.findById(cartDto.getUserId()).get(),
                 LocalDateTime.now(),
                 CartStatus.CART,
                 new HashSet<>());
@@ -30,8 +34,7 @@ public class CartMapper {
                 cartItem.getProduct().getName(),
                 cartItem.getProduct().getDescription(),
                 cartItem.getProduct().getPrice(),
-                null,
-                null);
+                cartItem.getProduct().getGroup());
     }
 
     public List<Product> mapToProductList(final List<CartItem> productList) {

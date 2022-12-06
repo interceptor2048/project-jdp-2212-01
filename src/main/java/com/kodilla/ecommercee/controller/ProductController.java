@@ -5,8 +5,6 @@ import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.mapper.ProductMapper;
-import com.kodilla.ecommercee.repository.GroupRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.service.ProductDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
 
 import java.util.List;
 
@@ -45,7 +41,7 @@ public class ProductController {
         } catch (ProductNotFoundException e) {
             return new ResponseEntity<>(
          new ProductDto(1L,"There is no product with id equals to" + productId,
-                 "",new BigDecimal(1),new HashSet<>(),new Group()), HttpStatus.BAD_REQUEST);
+                 "",new BigDecimal(1),1L), HttpStatus.BAD_REQUEST);
         }
     }
     @DeleteMapping(value = "{productId}")

@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ public class Group {
     @Column(name = "NAME")
     private String groupName;
 
+    @JsonManagedReference
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,

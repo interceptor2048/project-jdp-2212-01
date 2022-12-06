@@ -28,13 +28,10 @@ public class CartDbService {
         return cartRepository.save(cart);
     }
 
-    public Order createOrder(Long cartId, Long userId) throws Exception {
+    public Order createOrder(Long cartId) throws Exception {
         Order order = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
-//        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        Set<CartItem> set = new HashSet<>(cartItemRepository.findAllByOrder(order));
+        order.setCartStatus(CartStatus.ORDER);
 
-
-        return cartRepository.save(new Order(null, LocalDateTime.now(), CartStatus.ORDER, set));
-
+        return cartRepository.save(order);
     }
 }

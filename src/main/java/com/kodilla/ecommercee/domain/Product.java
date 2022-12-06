@@ -1,9 +1,10 @@
 
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.*;
 import java.math.BigDecimal;
@@ -42,6 +43,7 @@ public class Product {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private Set<CartItem> carts = new HashSet<>();
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private Group group;
@@ -51,6 +53,14 @@ public class Product {
         this.description = description;
         this.price = price;
         this.carts = carts;
+        this.group = group;
+    }
+
+    public Product(long id, String name, String description, BigDecimal price, Group group) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
         this.group = group;
     }
 }

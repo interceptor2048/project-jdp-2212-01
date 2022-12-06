@@ -41,9 +41,9 @@ public class CartController {
         return ResponseEntity.ok(productMapper.mapToProductDtoList(cartMapper.mapToProductList(products)));
     }
 
-    @PutMapping(value = "/addProducts/{cardId}/{productId}")
-    public ResponseEntity<ProductDto> addProduct(@PathVariable Long cardId, @PathVariable Long productId) throws Exception {
-        CartItem cartItem = cartItemDbService.addProduct(cardId, productId);
+    @PutMapping(value = "/addProducts/{cartId}/{productId}")
+    public ResponseEntity<ProductDto> addProduct(@PathVariable Long cartId, @PathVariable Long productId) throws Exception {
+        CartItem cartItem = cartItemDbService.addProduct(cartId, productId);
         return ResponseEntity.ok(productMapper.mapToProductDto(cartMapper.mapCartItemToProduct(cartItem)));
     }
 
@@ -53,8 +53,8 @@ public class CartController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "createOrder/{cardId}/{userId}")
-    public ResponseEntity<Order> createOrderFromCart(@PathVariable Long cardId, @PathVariable Long userId) throws Exception {
-        return ResponseEntity.ok(cartDbService.createOrder(cardId, userId));
+    @PostMapping(value = "createOrder/{cardId}")
+    public ResponseEntity<Order> createOrderFromCart(@PathVariable Long cardId) throws Exception {
+        return ResponseEntity.ok(cartDbService.createOrder(cardId));
     }
 }

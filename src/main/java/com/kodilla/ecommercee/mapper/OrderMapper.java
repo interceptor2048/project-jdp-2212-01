@@ -4,6 +4,8 @@ import com.kodilla.ecommercee.domain.CartItem;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
+import com.kodilla.ecommercee.service.CartItemDbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +16,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderMapper {
+
+    @Autowired
+    private CartMapper cartMapper;
+    @Autowired
+    CartItemDbService cartItemDbService;
+    @Autowired
+    ProductMapper productMapper;
 
     public Order mapToOrder (final OrderDto orderDto) {
 
@@ -39,26 +48,35 @@ public class OrderMapper {
         return order;
     }
 
-    public OrderDto mapToOrderDto (final Order order) {
-        List<Product> productList = new ArrayList<>();
-        for (CartItem cartItem : order.getCartItems()) {
-            for (int i = 0; i < cartItem.getQuantity(); i++) {
-                productList.add(cartItem.getProduct());
-            }
-        }
+    public OrderDto mapToOrderDto (final Order order) throws Exception {
+//        List<Product> productList = new ArrayList<>();
+//        for (CartItem cartItem : order.getCartItems()) {
+//            for (int i = 0; i < cartItem.getQuantity(); i++) {
+//                productList.add(cartItem.getProduct());
+//            }
+//        }
+        List<CartItem> cartItemList = cartItemDbService.getProductsList(order.getId());
+        List<Product> productList = cartMapper.mapToProductList(cartItemList);
+
         return new OrderDto(
                 order.getId(),
                 order.getUser(),
                 order.getDateTime(),
                 order.getCartStatus(),
-                null,
+                order.getCartItems(),
                 productList
         );
     }
 
     public List<OrderDto> mapToOrderDtoList(final List<Order> orderList) {
         return orderList.stream()
-                .map(this::mapToOrderDto)
+                .map(order -> {
+                    try {
+                        return mapToOrderDto(order);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
                 .collect(Collectors.toList());
     }
 }

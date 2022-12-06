@@ -34,9 +34,23 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("Order with given id doesn't exist", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UserWithGivenUserNameExist.class)
+    public ResponseEntity<Object> handleUserWithGivenUserNameExist(UserWithGivenUserNameExist exception) {
+        return new ResponseEntity<>("username is taken, choose another one", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserDoesntExist.class)
+    public ResponseEntity<Object> handleUserDoesntExist(UserDoesntExist exception) {
+        return new ResponseEntity<>("invalid login or password", HttpStatus.BAD_REQUEST);
+    }
     @ExceptionHandler(IllegalIdForOrderCreateException.class)
     public ResponseEntity<Object> handleOrderAlreadyExistsException (IllegalIdForOrderCreateException exception) {
         return new ResponseEntity<>("Illegal order id. Set id = 0 to create new order," +
                 " or use PUT method to update existing order.", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CartItemDousntExist.class)
+    public ResponseEntity<Object> handleCartItemDoesntExist (CartItemDousntExist exception) {
+        return new ResponseEntity<>("You have no product to delete", HttpStatus.BAD_REQUEST);
     }
 }
