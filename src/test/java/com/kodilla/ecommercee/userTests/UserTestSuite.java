@@ -79,10 +79,4 @@ public class UserTestSuite {
         assertEquals(userIds.size(), 3);
     }
 
-    @Test
-    void testAddUser() {
-        //Given
-        User user1 = new User();
-
-    }
 }
