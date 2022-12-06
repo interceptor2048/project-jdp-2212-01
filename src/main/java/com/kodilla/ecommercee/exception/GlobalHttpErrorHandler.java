@@ -48,4 +48,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("Illegal order id. Set id = 0 to create new order," +
                 " or use PUT method to update existing order.", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(CartItemDousntExist.class)
+    public ResponseEntity<Object> handleCartItemDoesntExist (CartItemDousntExist exception) {
+        return new ResponseEntity<>("You have no product to delete", HttpStatus.BAD_REQUEST);
+    }
 }

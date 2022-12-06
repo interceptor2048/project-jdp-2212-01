@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class Order {
     @Column(name = "ID")
     private Long id;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;

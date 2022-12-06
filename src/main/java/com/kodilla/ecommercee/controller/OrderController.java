@@ -34,7 +34,7 @@ public class OrderController {
 
     @GetMapping(value = "{orderId}")
 
-    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) throws OrderNotFoundException {
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) throws Exception {
         return ResponseEntity.ok(orderMapper.mapToOrderDto(dbService.getOrder(orderId)));
     }
 
@@ -45,7 +45,7 @@ public class OrderController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws Exception {
         Order order = orderMapper.mapToOrder(orderDto);
         Order savedOrder = dbService.saveOrder(order);
         return ResponseEntity.ok(orderMapper.mapToOrderDto(savedOrder));

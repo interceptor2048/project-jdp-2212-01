@@ -1,5 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -40,9 +42,11 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
+    @JsonBackReference
     @OneToMany(targetEntity = Order.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
+            orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Order> users = new ArrayList<>();
 
