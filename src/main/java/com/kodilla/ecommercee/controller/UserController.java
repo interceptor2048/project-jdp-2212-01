@@ -55,6 +55,7 @@ public class UserController {
         User user = userRepository.findByUsername(username);
         String generateUserKey = tokenService.generateToken(username, password);
         user.setUserKey(generateUserKey);
+        userRepository.save(user);
         return ResponseEntity.ok(generateUserKey);
     }
 }
