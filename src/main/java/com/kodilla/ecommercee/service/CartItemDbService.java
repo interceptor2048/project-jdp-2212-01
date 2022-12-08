@@ -86,4 +86,8 @@ public class CartItemDbService {
         cartItem.setTotalPrice(product.getPrice().multiply(new BigDecimal(String.valueOf(cartItem.getQuantity()))));
         cartItemRepository.save(cartItem);
     }
+
+    public CartItem saveCartItem(CartItem cartItem) {
+        return cartItemRepository.save(cartItem);
+    }
 }

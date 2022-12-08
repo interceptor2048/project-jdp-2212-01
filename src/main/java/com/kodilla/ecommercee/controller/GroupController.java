@@ -4,15 +4,12 @@ import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.exception.GroupNotFoundException;
 import com.kodilla.ecommercee.mapper.GroupMapper;
-import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.service.GroupDbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,8 +22,6 @@ public class GroupController {
     @Autowired
     private GroupMapper groupMapper;
 
-    @Autowired
-    private GroupRepository groupRepository;
 
     @GetMapping
     public ResponseEntity<List<GroupDto>> getGroups() {
