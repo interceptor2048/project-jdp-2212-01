@@ -1,6 +1,9 @@
 package com.kodilla.ecommercee.userTests;
 
+import com.kodilla.ecommercee.domain.CartItem;
+import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +23,24 @@ public class UserTestSuite {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CartRepository cartRepository;
+
     @Test
     void testSaveUser() {
         //Given
-        User user = new User();
+        User user1 = new User();
 
         //When
-        userRepository.save(user);
-        long userId = user.getUserId();
-        Optional<User> checkUser = userRepository.findById(userId);
+        userRepository.save(user1);
+        long userId1 = user1.getUserId();
+        Optional<User> checkUser = userRepository.findById(userId1);
 
         //Then
         assertTrue(checkUser.isPresent());
+
+        //Cleanup
+        userRepository.deleteById(userId1);
 
     }
 
@@ -77,6 +86,21 @@ public class UserTestSuite {
                 .collect(Collectors.toList());
         //Then
         assertEquals(userIds.size(), 3);
+
+    }
+
+    @Test
+    public void testRelationBetweenUserAndCart() {
+        //Given
+        User user = new User(154L,"Tester", "Marcin", "Pawelak", false, 154L);
+        Order cart = new Order();
+        CartItem cartItem = new CartItem();
+        cart.getCartItems().add(cartItem);
+
+        userRepository.save(user);
+        cartRepository.save(cart);
+        cart.setUser(user);
+
     }
 
 }
