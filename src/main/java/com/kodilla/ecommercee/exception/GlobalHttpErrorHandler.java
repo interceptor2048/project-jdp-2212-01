@@ -53,4 +53,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleCartItemDoesntExist (CartItemDousntExist exception) {
         return new ResponseEntity<>("You have no product to delete", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserIsBlockedException.class)
+    public ResponseEntity<Object> handleBlockUser (UserIsBlockedException exception) {
+        return new ResponseEntity<>("The user is blocked", HttpStatus.BAD_REQUEST);
+    }
 }
