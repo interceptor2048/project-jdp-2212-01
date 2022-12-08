@@ -2,14 +2,9 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
-import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
-import com.kodilla.ecommercee.exception.CartNotFoundException;
-import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
-import com.kodilla.ecommercee.repository.CartRepository;
-import com.kodilla.ecommercee.repository.UserRepository;
 import com.kodilla.ecommercee.service.CartDbService;
 import com.kodilla.ecommercee.service.CartItemDbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +25,6 @@ public class CartController {
     @Autowired
     private CartMapper cartMapper;
     @Autowired
-    private CartRepository cartRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private ProductMapper productMapper;
 
 
@@ -45,14 +36,14 @@ public class CartController {
     }
 
     @GetMapping(value = "/getCart/{cardId}")
-    public ResponseEntity<List<ProductDto>> getEmptyCart(@PathVariable Long cardId) throws Exception {
+    public ResponseEntity<List<ProductDto>> getCart(@PathVariable Long cardId) throws Exception {
         List<CartItem> products = cartItemDbService.getProductsList(cardId);
         return ResponseEntity.ok(productMapper.mapToProductDtoList(cartMapper.mapToProductList(products)));
     }
 
-    @PutMapping(value = "/addProducts/{cardId}/{productId}")
-    public ResponseEntity<ProductDto> addProduct(@PathVariable Long cardId, @PathVariable Long productId) throws Exception {
-        CartItem cartItem = cartItemDbService.addProduct(cardId, productId);
+    @PutMapping(value = "/addProducts/{cartId}/{productId}")
+    public ResponseEntity<ProductDto> addProduct(@PathVariable Long cartId, @PathVariable Long productId) throws Exception {
+        CartItem cartItem = cartItemDbService.addProduct(cartId, productId);
         return ResponseEntity.ok(productMapper.mapToProductDto(cartMapper.mapCartItemToProduct(cartItem)));
     }
 
@@ -62,13 +53,8 @@ public class CartController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "createOrder/{cardId}/{userId}")
-    public ResponseEntity<OrderDto> createOrderFromCart(@PathVariable Long cardId, @PathVariable Long userId) throws Exception {
-        Order order = cartRepository.findById(cardId).orElseThrow(CartNotFoundException::new);
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-
-        OrderDto toReturn = new OrderDto(order.getId(), user.getUserId(), order.getDateTime(), CartStatus.ORDER);
-
-        return ResponseEntity.ok().build();
+    @PostMapping(value = "createOrder/{cardId}")
+    public ResponseEntity<Order> createOrderFromCart(@PathVariable Long cardId) throws Exception {
+        return ResponseEntity.ok(cartDbService.createOrder(cardId));
     }
 }

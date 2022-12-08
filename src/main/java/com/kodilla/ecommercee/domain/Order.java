@@ -2,12 +2,12 @@ package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
-import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @NoArgsConstructor
@@ -22,6 +22,7 @@ public class Order {
     @Column(name = "ID")
     private Long id;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
@@ -30,11 +31,20 @@ public class Order {
     private LocalDateTime dateTime = LocalDateTime.now();
 
     @Column(name = "STATUS")
-    private CartStatus cartStatus = CartStatus.CART;
 
+    private CartStatus cartStatus = CartStatus.CART;
+    @JsonManagedReference
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "order",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private Set<CartItem> cartItems = new HashSet<>();
+
+    public Order(User user, LocalDateTime dateTime, CartStatus cartStatus, Set<CartItem> cartItems) {
+        this.user = user;
+        this.dateTime = dateTime;
+        this.cartStatus = cartStatus;
+        this.cartItems = cartItems;
+    }
 }

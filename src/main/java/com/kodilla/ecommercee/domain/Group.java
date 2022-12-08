@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GRUP")
+@Table(name = "\"GROUPS\"")
 public class Group {
 
     @Id
@@ -24,17 +26,18 @@ public class Group {
     @Column(name = "GROUP_ID")
     private long id;
 
+    @Column(name = "NAME")
+    private String groupName;
+
+    @JsonManagedReference
     @OneToMany(targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
-
-    @Column(name = "NUMBER")
-    private int number;
-
-    public Group(List<Product> products, int number) {
+    
+    public Group( String groupName, List<Product> products) {
         this.products = products;
-        this.number = number;
+        this.groupName = groupName;
     }
 }
