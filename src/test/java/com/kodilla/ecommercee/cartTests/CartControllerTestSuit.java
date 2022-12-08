@@ -56,7 +56,7 @@ public class CartControllerTestSuit {
     @Test
     void testGetCart() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);
@@ -83,7 +83,7 @@ public class CartControllerTestSuit {
     @Test
     void testAddProduct() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);
@@ -107,7 +107,7 @@ public class CartControllerTestSuit {
     @Test
     void testDeleteProductFromCart() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);
@@ -144,7 +144,7 @@ public class CartControllerTestSuit {
     @Test
     void testCreateOrder() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);

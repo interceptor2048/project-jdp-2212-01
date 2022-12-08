@@ -26,6 +26,7 @@ public class GroupController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
+
     @GetMapping
     public ResponseEntity<List<GroupDto>> getGroups() {
         List<Group> groups = groupDbService.getAllGroups();
