@@ -7,14 +7,11 @@ import com.kodilla.ecommercee.exception.OrderNotFoundException;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.OrderDbService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 
 import java.util.List;
 
@@ -25,6 +22,8 @@ public class OrderController {
 
     private final OrderDbService dbService;
     private final OrderMapper orderMapper;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     @GetMapping
     public List<OrderDto> getOrders() {
