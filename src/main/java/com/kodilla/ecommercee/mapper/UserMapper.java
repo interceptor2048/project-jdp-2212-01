@@ -3,6 +3,8 @@ package com.kodilla.ecommercee.mapper;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
 
+import java.util.ArrayList;
+
 public class UserMapper {
 
     public UserDto mapToUserDto(final User user) {
@@ -12,7 +14,8 @@ public class UserMapper {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getIsBlocked(),
-                user.getUserKey());
+                user.getUserKey(),
+                user.getPassword());
     }
 
 }

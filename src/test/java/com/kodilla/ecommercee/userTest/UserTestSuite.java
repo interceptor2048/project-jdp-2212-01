@@ -1,9 +1,6 @@
-package com.kodilla.ecommercee.userTests;
+package com.kodilla.ecommercee.userTest;
 
-import com.kodilla.ecommercee.domain.CartItem;
-import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.User;
-import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +19,6 @@ public class UserTestSuite {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private CartRepository cartRepository;
-
     @Test
     void testSaveUser() {
         //Given
@@ -80,27 +73,39 @@ public class UserTestSuite {
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);
+        long userId1 = user1.getUserId();
+        long userId2 = user2.getUserId();
+        long userId3 = user3.getUserId();
         List<User> users = (List<User>) userRepository.findAll();
         List<Long> userIds = users.stream()
                 .map(User::getUserId)
                 .collect(Collectors.toList());
         //Then
-        assertEquals(userIds.size(), 3);
-
+        try {
+            assertEquals(userIds.size(), 3);
+        } finally {
+            //Cleanup
+            userRepository.deleteById(userId1);
+            userRepository.deleteById(userId2);
+            userRepository.deleteById(userId3);
+        }
     }
 
     @Test
-    public void testRelationBetweenUserAndCart() {
+    void testUserRepositoryFindById() {
         //Given
-        User user = new User(154L,"Tester", "Marcin", "Pawelak", false, 154L);
-        Order cart = new Order();
-        CartItem cartItem = new CartItem();
-        cart.getCartItems().add(cartItem);
-
+        User user = new User();
         userRepository.save(user);
-        cartRepository.save(cart);
-        cart.setUser(user);
-
+        long userId = user.getUserId();
+        //When
+        Optional<User> userFoundById = userRepository.findById(userId);
+        //Then
+        try {
+            assertTrue(userFoundById.isPresent());
+        } finally {
+            //Cleanup
+            userRepository.deleteById(userId);
+        }
     }
 
 }
