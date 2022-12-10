@@ -2,14 +2,14 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.exception.UserDoesntExist;
-import com.kodilla.ecommercee.exception.UserNotFoundException;
-import com.kodilla.ecommercee.exception.UserWithGivenUserNameExist;
+import com.kodilla.ecommercee.exception.UserIsBlockedException;
 import com.kodilla.ecommercee.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -30,14 +30,18 @@ public class TokenService {
 
     public final static Key signedKey = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS512.getJcaName());
 
-    public String generateToken(String username, String password) throws UserNotFoundException, UserDoesntExist {
+    public String generateToken(String username, String password) throws UserDoesntExist, UserIsBlockedException {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
         User user = userRepository.findByUsername(username);
         if(user == null) {
-            throw new UserNotFoundException();
+            throw new UserDoesntExist();
         }
-
-        if(!user.getUsername().equals(username) || !user.getPassword().equals(password)) {
+        if(user.getIsBlocked()) {
+            throw new UserIsBlockedException();
+        }
+        boolean pass = bCryptPasswordEncoder.matches(password, user.getPassword());
+        if(!user.getUsername().equals(username) || !pass) {
             throw new UserDoesntExist();
         }
 
@@ -50,14 +54,6 @@ public class TokenService {
                 .compact();
     }
 
-    public User saveUser(User user) throws UserWithGivenUserNameExist {
-        User user1 = userRepository.findByUsername(user.getUsername());
-
-        if (user1 == null) {
-            return userRepository.save(user);
-        }
-        throw new UserWithGivenUserNameExist();
-    }
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
