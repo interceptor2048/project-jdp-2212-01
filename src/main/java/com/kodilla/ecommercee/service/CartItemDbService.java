@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.service;
 import com.kodilla.ecommercee.domain.CartItem;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.exception.CartItemDousntExist;
 import com.kodilla.ecommercee.exception.CartNotFoundException;
 import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.mapper.CartMapper;
@@ -54,7 +55,9 @@ public class CartItemDbService {
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
 
         List<CartItem> cartItemList = cartItemRepository.findAllByOrderAndProduct(cart, product);
-        if (cartItemList.size() == 1) {
+        if (cartItemList.size() == 0) {
+            throw new CartItemDousntExist();
+        } else if (cartItemList.size() == 1) {
             CartItem cartItem = cartItemRepository.findByOrderAndProduct(cart, product);
             if (cartItem.getQuantity() > 1) {
                 getCartItemToRemove(product, cartItem);
@@ -82,5 +85,9 @@ public class CartItemDbService {
         cartItem.setQuantity(cartItem.getQuantity() - 1);
         cartItem.setTotalPrice(product.getPrice().multiply(new BigDecimal(String.valueOf(cartItem.getQuantity()))));
         cartItemRepository.save(cartItem);
+    }
+
+    public CartItem saveCartItem(CartItem cartItem) {
+        return cartItemRepository.save(cartItem);
     }
 }

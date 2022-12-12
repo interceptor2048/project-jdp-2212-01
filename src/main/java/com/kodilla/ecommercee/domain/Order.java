@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -21,7 +22,9 @@ public class Order {
     @Column(name = "ID")
     private Long id;
 
+    @JsonManagedReference
     @ManyToOne
+    @JsonIgnoreProperties("user")
     @JoinColumn(name = "USER_ID")
     private User user;
 
@@ -32,6 +35,7 @@ public class Order {
 
     private CartStatus cartStatus = CartStatus.CART;
     @JsonManagedReference
+    @JsonIgnoreProperties("cartItems")
     @OneToMany(targetEntity = CartItem.class,
             mappedBy = "order",
             cascade = CascadeType.ALL,

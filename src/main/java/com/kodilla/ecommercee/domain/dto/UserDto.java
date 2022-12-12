@@ -20,5 +20,7 @@ public class UserDto {
 
     private Boolean isBlocked;
 
-    private Long userKey;
+    private String userKey;
+
+    private String password;
 }

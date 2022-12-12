@@ -1,23 +1,29 @@
 package com.kodilla.ecommercee.mapper;
 
-import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.repository.GroupRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductMapper {
 
+    @Autowired
+    GroupRepository groupRepository;
+
     public ProductDto mapToProductDto(final Product product) {
-        return new ProductDto(product.getId(),
-                product.getName(),
-                product.getDescription(),
-                product.getPrice(),
-                null,
-                product.getGroup());
+        return ProductDto.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .groupId(product.getGroup().getId())
+                .build();
     }
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
@@ -29,7 +35,7 @@ public class ProductMapper {
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
-                null,
-                productDto.getGroup());
+                new HashSet<>(),
+                groupRepository.findById(productDto.getGroupId()).get());
     }
 }

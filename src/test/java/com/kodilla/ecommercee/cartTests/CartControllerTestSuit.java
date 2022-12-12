@@ -4,7 +4,7 @@ import com.kodilla.ecommercee.controller.CartController;
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
-import com.kodilla.ecommercee.exception.ProductNotFoundException;
+import com.kodilla.ecommercee.repository.CartItemRepository;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
@@ -17,10 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,12 +35,16 @@ public class CartControllerTestSuit {
     private GroupRepository groupRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
 
     @Test
     void testCreateEmptyCart() {
         //Given
-        CartDto cartDto = new CartDto(1, new ArrayList<>());
+        User user = new User();
+        userRepository.save(user);
+        CartDto cartDto = new CartDto(1, user.getUserId());
 
         //When
         ResponseEntity<CartDto> createCart = cartController.createEmptyCart(cartDto);
@@ -55,7 +56,7 @@ public class CartControllerTestSuit {
     @Test
     void testGetCart() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);
@@ -82,7 +83,7 @@ public class CartControllerTestSuit {
     @Test
     void testAddProduct() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);
@@ -106,7 +107,7 @@ public class CartControllerTestSuit {
     @Test
     void testDeleteProductFromCart() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);
@@ -143,7 +144,7 @@ public class CartControllerTestSuit {
     @Test
     void testCreateOrder() throws Exception {
         //Given
-        User user = new User("Name", "First name", "Last name", false, 2L, new ArrayList<>());
+        User user = new User("Name", "First name", "Last name", false, "2L", new ArrayList<>());
         userRepository.save(user);
         Order cart = new Order(user, LocalDateTime.now(), CartStatus.CART, new HashSet<>());
         cartDbService.saveCart(cart);
@@ -162,9 +163,10 @@ public class CartControllerTestSuit {
 
         //When
 
-        ResponseEntity<Order> createOrder = cartController.createOrderFromCart(cart.getId(), user.getUserId());
+        ResponseEntity<Order> createOrder = cartController.createOrderFromCart(cart.getId());
+        Set<CartItem> set = new HashSet<>(cartItemRepository.findAllByOrder(cart));
 
-        for (CartItem cartItem : Objects.requireNonNull(createOrder.getBody()).getCartItems()) {
+        for (CartItem cartItem : set) {
             System.out.println(cartItem);
         }
 
@@ -172,10 +174,6 @@ public class CartControllerTestSuit {
         assertEquals(200, createOrder.getStatusCode().value());
         assertEquals(CartStatus.ORDER, Objects.requireNonNull(createOrder.getBody()).getCartStatus());
 
-        assertEquals(3, createOrder.getBody().getCartItems().size());
-
-
+        assertEquals(3, set.size());
     }
-
-
 }
