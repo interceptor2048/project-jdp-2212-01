@@ -12,8 +12,6 @@ import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.CartItemDbService;
 import com.kodilla.ecommercee.service.OrderDbService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +27,6 @@ public class OrderController {
     private final OrderMapper orderMapper;
     private final CartItemMapper cartItemMapper;
     private final CartItemDbService cartItemDbService;
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     @GetMapping
     public List<OrderDto> getOrders() {
