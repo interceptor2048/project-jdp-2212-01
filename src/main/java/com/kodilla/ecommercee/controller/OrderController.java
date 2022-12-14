@@ -40,7 +40,7 @@ public class OrderController {
 
     @GetMapping(value = "{orderId}")
 
-    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) throws Exception {
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) throws OrderNotFoundException {
         return ResponseEntity.ok(orderMapper.mapToOrderDto(dbService.getOrder(orderId)));
     }
 

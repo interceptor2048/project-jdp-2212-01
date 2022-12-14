@@ -5,12 +5,10 @@ import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.exception.GroupNotFoundException;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.service.GroupDbService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -24,9 +22,6 @@ public class GroupController {
     @Autowired
     private GroupMapper groupMapper;
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
-
-
     @GetMapping
     public ResponseEntity<List<GroupDto>> getGroups() {
         List<Group> groups = groupDbService.getAllGroups();
@@ -35,7 +30,6 @@ public class GroupController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addGroup(@RequestBody GroupDto groupDto) {
-        logger.info("Request to create new group of products: {}", groupDto.toString());
         Group group = groupMapper.mapToGroup(groupDto);
         groupDbService.saveGroup(group);
         return ResponseEntity.ok().build();

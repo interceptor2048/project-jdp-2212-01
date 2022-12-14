@@ -7,6 +7,8 @@ import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.CartDbService;
 import com.kodilla.ecommercee.service.CartItemDbService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,9 @@ public class CartController {
     @Autowired
     private ProductMapper productMapper;
 
+    static Logger log = LogManager.getLogger(CartController.class.getName());
+
+
 
     @PostMapping(value = "/emptyCart", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CartDto> createEmptyCart(@RequestBody CartDto cartDto) {
@@ -38,6 +43,7 @@ public class CartController {
     @GetMapping(value = "/getCart/{cardId}")
     public ResponseEntity<List<ProductDto>> getCart(@PathVariable Long cardId) throws Exception {
         List<CartItem> products = cartItemDbService.getProductsList(cardId);
+        log.info("Request to get cart");
         return ResponseEntity.ok(productMapper.mapToProductDtoList(cartMapper.mapToProductList(products)));
     }
 
